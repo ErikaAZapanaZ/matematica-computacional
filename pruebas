@@ -1,0 +1,36 @@
+import numpy as np
+import libreria as lib
+import time
+
+n=150
+A=np.random.rand(n,n)
+b=np.random.rand(n,1)
+
+inicio_tim= time.perf_counter()
+x=lib.GaussElimSimple(A,b)
+norE1=np.linalg.norm(A@x-b,1)
+fin_tim=time.perf_counter()
+tiempo_transcurrido = fin_tim-inicio_tim 
+print("el tiempo:", tiempo_transcurrido)
+#print("||AX-b||_1: es la norms suma de los valores absolutos de su elementos \n ", np.linalg.norm(A@x-b,1)) 
+#print("||AX-b||_1: es la norma euclidiana \n ", np.linalg.norm(A@x-b,2))
+#print("||AX-b||_1: es la norma del infimo \n  ", np.linalg.norm(A@x-b,np.inf))
+#print("||AX-b||_1: es la norma de frobenius \n ", np.linalg.norm(A@x-b,"fro"))
+
+inicio_tim= time.perf_counter()
+x=lib.GaussEimWhitPiv(A,b)
+norE2=np.linalg.norm(A@x-b,1)
+fin_tim=time.perf_counter()
+tiempo_transcurrido = fin_tim-inicio_tim 
+print("el tiempo:", tiempo_transcurrido)
+
+inicio_tim= time.perf_counter()
+x=np.linalg.solve(A,b)
+norE3=np.linalg.norm(A@x-b,1)
+fin_tim=time.perf_counter()
+tiempo_transcurrido = fin_tim-inicio_tim 
+print("el tiempo:", tiempo_transcurrido)
+
+print("el error de normE1 es \n", norE1)
+print("el error de normE2 es \n", norE2)
+print("el error de normE3 es \n", norE3)
